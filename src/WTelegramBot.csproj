@@ -13,7 +13,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <PackageId>WTelegramBot</PackageId>
-    <Version>666</Version>
+    <Version>666.1</Version>
     <Authors>Wizou</Authors>
     <Description>Telegram Bot API (local server) library providing more extended features
 

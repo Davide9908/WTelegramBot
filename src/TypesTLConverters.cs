@@ -235,7 +235,7 @@ public static class TypesTLConverters
 			| (permissions.CanChangeInfo ? 0 : ChatBannedRights.Flags.change_info)
 			| (permissions.CanInviteUsers ? 0 : ChatBannedRights.Flags.invite_users)
 			| (permissions.CanPinMessages ? 0 : ChatBannedRights.Flags.pin_messages)
-			| (permissions.CanManageTopics ? 0 : ChatBannedRights.Flags.manage_topics)
+			| (permissions.CanManageTopics.HasValue && permissions.CanManageTopics.Value ? 0 : ChatBannedRights.Flags.manage_topics)
 	};
 
 	[return: NotNullIfNotNull(nameof(location))]
