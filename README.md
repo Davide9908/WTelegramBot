@@ -1,4 +1,4 @@
-[![Bot API 9.3](https://img.shields.io/badge/Bot_API-9.3-blueviolet)](https://core.telegram.org/bots/api)
+[![Bot API 9.4](https://img.shields.io/badge/Bot_API-9.4-blueviolet)](https://core.telegram.org/bots/api)
 [![NuGet version](https://img.shields.io/nuget/v/WTelegramBot?color=00508F)](https://www.nuget.org/packages/WTelegramBot/)
 [![NuGet prerelease](https://img.shields.io/nuget/vpre/WTelegramBot?color=C09030&label=dev+nuget)](https://www.nuget.org/packages/WTelegramBot/absoluteLatest)
 [![Donate](https://img.shields.io/badge/Help_this_project:-Donate-ff4444)](https://www.buymeacoffee.com/wizou)
@@ -22,7 +22,6 @@ Some examples:
 - Get full details of users/chats
 - Send/receive big files _(and track download progress)_
 - Connect using a MTProxy
-- Change the bot's profile picture
 - Monitor progress of file uploads/downloads
 
 You also get access to raw Updates information from Client API, in addition to the usual Bot API updates.
@@ -62,7 +61,6 @@ Some extended API calls can be made via `WTelegram.Bot` special methods:
 - `GetChatMemberList`: fetch a list of chat members
 - `GetMessagesById`: fetch posted messages (or range of messages) based on their message IDs
 - `GetChat`: can obtain details about any user/group/channel based on their public name
-- `SetMyPhoto`: change the bot's profile picture
 - `GetForumTopic`/`GetForumTopicExtended`: get details about existing forum topic
 
 Other extended API calls not usually accessible to Bot API can be made via the `Bot.Client` property which is the underlying [WTelegramClient](https://wiz0u.github.io/WTelegramClient/) instance.  

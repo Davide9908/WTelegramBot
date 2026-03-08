@@ -432,7 +432,7 @@ public partial class Bot
 		if (msgBase?.ReplyTo == null) return msg;
 		if (msgBase.ReplyTo is MessageReplyHeader reply_to)
 		{
-			if (replyToMessage != null)
+			if (replyToMessage != null && reply_to.reply_to_msg_id == replyToMessage.Id)
 				msg.ReplyToMessage = replyToMessage;
 			else if (reply_to.reply_from == null)
 				msg.ReplyToMessage = await GetRepliedMessage(msgBase);
@@ -632,22 +632,9 @@ public partial class Bot
 				else if (mmd.flags.HasFlag(MessageMediaDocument.Flags.video))
 					msg.Video = document.Video(mmd);
 				else if (document.GetAttribute<DocumentAttributeAudio>() is { } audio)
-				{
-					msg.Audio = new Telegram.Bot.Types.Audio
-					{
-						FileSize = document.size,
-						Duration = (int)(audio?.duration + 0.5 ?? 0.0),
-						Performer = audio?.performer,
-						Title = audio?.title,
-						FileName = document.Filename,
-						MimeType = document.mime_type,
-						Thumbnail = thumb?.PhotoSize(document.ToFileLocation(thumb), document.dc_id)
-					}.SetFileIds(document.ToFileLocation(), document.dc_id);
-				}
+					msg.Audio = document.Audio(audio);
 				else if (document.GetAttribute<DocumentAttributeSticker>() is { } sticker)
-				{
 					msg.Sticker = await MakeSticker(document, sticker);
-				}
 				else
 				{
 					msg.Document = document.Document(thumb);
@@ -943,6 +930,8 @@ public partial class Bot
 				SuggestedPostMessage = await GetRepliedMessage(msgSvc),
 				Reason = maspr.flags.HasFlag(MessageActionSuggestedPostRefund.Flags.payer_initiated) ? SuggestedPostRefundedReason.PaymentRefunded : SuggestedPostRefundedReason.PostDeleted
 			},
+			MessageActionNewCreatorPending mancp => msg.ChatOwnerLeft = new ChatOwnerLeft { NewOwner = User(mancp.new_creator_id) },
+			MessageActionChangeCreator macc => msg.ChatOwnerChanged = new ChatOwnerChanged { NewOwner = User(macc.new_creator_id)! },
 			_ => null,
 		};
 	}
